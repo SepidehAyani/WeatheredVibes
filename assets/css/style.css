@@ -1,0 +1,10 @@
+.hero {
+    background-image: url("../images/weatherbanner.png");
+    background-size:cover;
+    background-position: center;
+}
+
+.hero-body {
+    font-family: cursive;
+    color: rgb(54, 54, 102);
+}
