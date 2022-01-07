@@ -4,7 +4,28 @@
     background-position: center;
 }
 
-.hero-body {
+#hero {
     font-family: cursive;
+    text-align: center;
     color: rgb(54, 54, 102);
+    background-color: rgba(253, 254, 255, 0.623);
+}
+
+.subtitle {
+    text-align: center;
+}
+
+#weather {
+    text-align: center;
+    background-color: rgba(40, 147, 247, 0.801);
+}
+
+#music {
+    text-align: center;
+    background-color: rgba(110, 180, 245, 0.801);
+}
+
+#history {
+    text-align: center;
+    background-color: rgba(175, 213, 248, 0.801);
 }
