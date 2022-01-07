@@ -15,9 +15,14 @@
     text-align: center;
 }
 
+#search {
+    background-color: rgba(250, 159, 98, 0.856);
+}
+
 #weather {
     text-align: center;
-    background-color: rgba(40, 147, 247, 0.801);
+    background-color: rgba(32, 39, 133, 0.884);
+    color: white;
 }
 
 #music {
@@ -28,4 +33,8 @@
 #history {
     text-align: center;
     background-color: rgba(175, 213, 248, 0.801);
+}
+
+.title {
+    color: white;
 }
