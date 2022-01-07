@@ -117,4 +117,5 @@ console.log(data.main.temp);
   
 
     citySearchEl.addEventListener("submit", formSubmitHandler);
+    ////consider putting modal function under here....... (bulma or jquery)
 
