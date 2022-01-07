@@ -12,8 +12,8 @@ As a music lover, the user wants to be prompted to the music based on the weathe
 
 
 ## Contributers
-Kevin Wilder
-Logan Donald
+Kevin
+Logan
 Megan
 Heidi
 Sepideh
