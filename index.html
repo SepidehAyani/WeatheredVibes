@@ -14,7 +14,7 @@
 <body>
   <header class="hero is-medium is-link">
     <div class="hero-body">
-      <p class="title is-2">
+      <p id="hero" class="title is-2 box">
         Weathered Vibes
       </p>
       <p class="subtitle">
@@ -22,37 +22,38 @@
       </p>
     </div>
   </header>
-
   <main>
-    <div class="box">
-      <h3 class="title is-4">Search By City:</h3>
-      <form id="city-search">
-        <input id="city-input" class="input is-rounded" type="text" placeholder="Pick a city">
-        <button id="search-btn" class="button is-info is-outlined is-rounded">Search</button>
-      </form>
+    <div id="search" class="box">
+      <h3 class="title is-5">Search By City:</h3>
+      <div id="search-input"
+        class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+        <input class="input is-rounded" type="text" placeholder="Pick a city">
+        <button class="button is-info is-outlined is-rounded">Search</button>
+      </div>
     </div>
-
-    <div class="columns is-multiline is-mobile is-centered">
-      <div class="column is-one-quarter">
+    <div class="columns is-centered is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+      <div id="weather" class="column is-one-quarter box">
         <div class="title is-5">Weather</div>
-        <div id="current-weather">
-          <div>City & Date</div>
-          <div>Forecast</div>
-          <div>Temperature</div>
-          <div>Wind Speed</div>
-          <div">Humidity</div>
-        </div>
+        <!-- <div>City & Date</div>
+              <div>Forecast</div>
+              <div>Temperature</div>
+              <div>Wind Speed</div>
+              <div>Humidity</div> -->
       </div>
-      <div class="column">
+      <div id="music" class="column box">
         <div class="title is-5">Music</div>
+        <!-- <button class="button is-danger">Play</button>
+              <button class="button is-primary">Pause</button> -->
       </div>
-      <div class="column is-one-quarter">
+      <div id="history" class="column is-one-quarter box">
         <div class="title is-5">Previously Searched</div>
       </div>
     </div>
+    <div id="radar" class="box">
+      <div id="radar-map" class="title is-5">Radar Map</div>
+    </div>
 
   </main>
-  <script src="assets/js/weather.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,57 @@
+.hero {
+    background-image: url("../images/weatherbanner.png");
+    background-size:cover;
+    background-position: center;
+}
+
+#hero {
+    font-family: cursive;
+    text-align: center;
+    color: rgb(54, 54, 102);
+    background-color: rgba(253, 254, 255, 0.623);
+}
+
+.subtitle {
+    text-align: center;
+}
+
+#search {
+    background-color:rgb(175, 224, 248);
+}
+
+#search-input {
+    margin: 20px;
+}
+
+#weather {
+    text-align: center;
+    background-color: rgba(32, 39, 133, 0.884);
+    color: white;
+    margin: 10px;
+}
+
+#music {
+    text-align: center;
+    background-color: rgba(110, 180, 245, 0.801);
+    margin: 10px;
+}
+
+#history {
+    text-align: center;
+    background-color: rgba(175, 213, 248, 0.801);
+    margin: 10px;
+}
+
+.title {
+    color: white;
+}
+
+#radar {
+    background-color: rgb(217, 227, 235);
+    margin:auto;
+}
+
+#radar-map {
+    color:rgb(54, 54, 102);
+    text-align: center;
+}
