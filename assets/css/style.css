@@ -45,3 +45,13 @@
 .title {
     color: white;
 }
+
+#radar {
+    background-color: rgb(217, 227, 235);
+    margin:auto;
+}
+
+#radar-map {
+    color:rgb(54, 54, 102);
+    text-align: center;
+}

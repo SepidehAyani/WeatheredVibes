@@ -2,55 +2,59 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-    <title>Weathered Vibes</title>
+  <title>Weathered Vibes</title>
 </head>
 
 <body>
-    <header class="hero is-medium is-link">
-      <div class="hero-body">
-        <p id="hero" class="title is-2 box">
-          Weathered Vibes
-        </p>
-        <p class="subtitle">
-          Connecting music to weather
-        </p>
-      </div>
-    </header>
+  <header class="hero is-medium is-link">
+    <div class="hero-body">
+      <p id="hero" class="title is-2 box">
+        Weathered Vibes
+      </p>
+      <p class="subtitle">
+        Connecting music to weather
+      </p>
+    </div>
+  </header>
 
-    <main>
-        <div id="search" class="box">
-            <h3 class="title is-5">Search By City:</h3>
-            <div id="search-input" class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-              <input class="input is-rounded" type="text" placeholder="Pick a city">
-              <button class="button is-info is-outlined is-rounded">Search</button>
-            </div>
-        </div>
-        <div class="columns is-centered is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-            <div id="weather" class="column is-one-quarter box">
-              <div class="title is-5">Weather</div>
-              <!-- <div>City & Date</div>
+  <main>
+    <div id="search" class="box">
+      <h3 class="title is-5">Search By City:</h3>
+      <div id="search-input"
+        class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+        <input class="input is-rounded" type="text" placeholder="Pick a city">
+        <button class="button is-info is-outlined is-rounded">Search</button>
+      </div>
+    </div>
+    <div class="columns is-centered is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+      <div id="weather" class="column is-one-quarter box">
+        <div class="title is-5">Weather</div>
+        <!-- <div>City & Date</div>
               <div>Forecast</div>
               <div>Temperature</div>
               <div>Wind Speed</div>
               <div>Humidity</div> -->
-            </div>
-            <div id="music" class="column box">
-              <div class="title is-5">Music</div>
-              <button class="button is-danger">Play</button>
-              <button class="button is-primary">Pause</button>
-            </div>
-            <div id="history" class="column is-one-quarter box">
-              <div class="title is-5">Previously Searched</div>
-            </div>
-          </div>
+      </div>
+      <div id="music" class="column box">
+        <div class="title is-5">Music</div>
+        <!-- <button class="button is-danger">Play</button>
+              <button class="button is-primary">Pause</button> -->
+      </div>
+      <div id="history" class="column is-one-quarter box">
+        <div class="title is-5">Previously Searched</div>
+      </div>
+    </div>
+    <div id="radar" class="box">
+      <div id="radar-map" class="title is-5">Radar Map</div>
+    </div>
 
-    </main>
+  </main>
 </body>
 
 </html>
