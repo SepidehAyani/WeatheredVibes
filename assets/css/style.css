@@ -16,23 +16,30 @@
 }
 
 #search {
-    background-color: rgba(250, 159, 98, 0.856);
+    background-color:rgb(175, 224, 248);
+}
+
+#search-input {
+    margin: 20px;
 }
 
 #weather {
     text-align: center;
     background-color: rgba(32, 39, 133, 0.884);
     color: white;
+    margin: 10px;
 }
 
 #music {
     text-align: center;
     background-color: rgba(110, 180, 245, 0.801);
+    margin: 10px;
 }
 
 #history {
     text-align: center;
     background-color: rgba(175, 213, 248, 0.801);
+    margin: 10px;
 }
 
 .title {
