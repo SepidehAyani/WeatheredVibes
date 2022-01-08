@@ -1,6 +1,6 @@
 var searchBtnEl = document.querySelector("#search-btn");
 var cityInputEl = document.querySelector("#city-input");
-var citySearchEl= document.querySelector("#city-search");
+var citySearchEl= document.querySelector("#search-input");
 
 var city = [];
 
@@ -69,7 +69,7 @@ console.log(dt.toDateString());
 
 
 
-var currentWeatherEl = document.querySelector("#current-weather");
+var currentWeatherEl = document.querySelector("#weather");
 currentWeatherEl.innerHTML= "";
 var cityDateEl = document.createElement("ul");
 cityDateEl.textContent = data.name + " " + dt;
