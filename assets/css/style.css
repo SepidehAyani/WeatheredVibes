@@ -48,6 +48,7 @@
 
 #radar {
     background-color: rgb(217, 227, 235);
+    margin: 10px;
 }
 
 #radar-map {
