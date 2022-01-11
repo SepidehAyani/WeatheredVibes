@@ -73,64 +73,6 @@ function currentWeather(city) {
                     addToList(city);
                 }
             }
-<<<<<<< HEAD
-        })
-        .catch(function (error) {
-            console.log("Unable to connect to OpenWeather");
-        });
-};
-
-var displayWeather = function (data, city) {
-
-    console.log(data.main);
-    console.log(data.dt); //date
-    console.log(data.main.temp); ///temp
-    console.log(data.weather);
-    console.log(data.wind.speed);//wind speed
-    console.log(data.main.humidity); //humidity
-    console.log(data.weather[0].main);//current condtions
-    console.log(data.name);///city name
-    var dt = new Date(data.dt * 1000);
-    console.log(dt.toDateString());
-    var currentWeatherEl = document.querySelector("#weather");
-    currentWeatherEl.innerHTML = "";
-    var cityDateEl = document.createElement("ul");
-    cityDateEl.textContent = data.name + " " + dt;
-    var tempEl = document.createElement("ul");
-    tempEl.textContent = "Current Temp: " + data.main.temp + " \u00B0F";
-    var currentConditionsEl = document.createElement("ul");
-    currentConditionsEl.textContent = data.weather[0].main;
-    var windEl = document.createElement("ul");
-    windEl.textContent = "Wind Speed: " + data.wind.speed + " m/s";
-    var humidityEl = document.createElement("ul");
-    humidityEl.textContent = "Humidity: " + data.main.humidity;
-    currentWeatherEl.appendChild(cityDateEl);
-    currentWeatherEl.appendChild(tempEl);
-    currentWeatherEl.appendChild(currentConditionsEl);
-    currentWeatherEl.appendChild(windEl);
-    currentWeatherEl.appendChild(humidityEl);
-
-};
-
-// save to local storage 
-function saveSearch (city) {
-    var searchTerm = city;
-    searchHistory.push(searchTerm);
-    localStorage.setItem("cityname", JSON.stringify(searchHistory));
-    console.log(searchTerm);
-    addToList(city);
-}
-
-//add searched city to a list
-function addToList(city) {
-    var listEl = $("<li>" + city + "</li>");
-    $(listEl).attr("class", "list-group-item");
-    $(listEl).attr("data-value", city.toUpperCase());
-    $(".list-group").append(listEl);
-    console.log(city);
-}
-
-=======
         }
 
     });
@@ -154,17 +96,12 @@ function addToList(c) {
     $(listEl).attr("data-value", c.toUpperCase());
     $(".list-group").append(listEl);
 }
->>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
 //past searched cities
 function invokePastSearch(event) {
     var liEl = event.target;
     if (event.target.matches("li")) {
         city = liEl.textContent.trim();
-<<<<<<< HEAD
-        searchCity(city);
-=======
         currentWeather(city);
->>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
     }
 }
 
@@ -178,32 +115,13 @@ function loadlastCity() {
             addToList(sCity[i]);
         }
         city = sCity[i - 1];
-<<<<<<< HEAD
-        searchCity(city);
-    }
-=======
         currentWeather(city);
     }
 
->>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
 }
 //clear history of searched cities
 function clearHistory(event) {
     event.preventDefault();
-<<<<<<< HEAD
-    localStorage.removeItem("cityname");
-    document.location.reload();
-}
-
-
-$(document).on("click", invokePastSearch);
-$(window).on("load", loadlastCity);
-$("#clear-history").on("click", clearHistory);
-citySearchEl.addEventListener("submit", formSubmitHandler);
-    ////consider putting modal function under here....... (bulma or jquery)
-
-
-=======
     lookupCity = [];
     localStorage.removeItem("cityname");
     document.location.reload();
@@ -214,4 +132,3 @@ $("#search-button").on("click", displayWeather);
 $(document).on("click", invokePastSearch);
 $(window).on("load", loadlastCity);
 $("#clear-history").on("click", clearHistory);
->>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
