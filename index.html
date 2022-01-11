@@ -4,69 +4,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Weathered Vibes</title>
+  <!--bootstrap-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+  <!--CSS font-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
+  <!--title & subtitle-->
   <header class="hero is-medium is-link">
     <div class="hero-body">
-      <p id="hero" class="title is-2 box">
-        Weathered Vibes
-      </p>
-      <p class="subtitle">
-        Connecting music to weather
-      </p>
+      <h3 id="hero" class="title is-2 box">
+        <strong>Weathered Vibes</strong>
+        <img id="img" src="./assets/images/weather icon 1.png" alt="weather icon 1">
+        <img id="img" src="./assets/images/weather icon 2.png" alt="weather icon 2">
+        <img id="img" src="./assets/images/weather icon 3.png" alt="weather icon 3">
+        <img id="img" src="./assets/images/weather icon 4.png" alt="weather icon 4">
+        <img id="img" src="./assets/images/weather icon 5.png" alt="weather icon 5">
+        <img id="img" src="./assets/images/weather icon 6.png" alt="weather icon 6">
+        <img id="img" src="./assets/images/weather icon 7.png" alt="weather icon 7">
+        <img id="img" src="./assets/images/weather icon 8.png" alt="weather icon 8">
+        <img id="img" src="./assets/images/weather icon 9.png" alt="weather icon 9">
+        <img id="img" src="./assets/images/weather icon 10.png" alt="weather icon 10">
+        <img id="img" src="./assets/images/weather icon 11.png" alt="weather icon 11">
+      </h3>
+      <p class="subtitle"> Connecting music to weather</p>
     </div>
   </header>
-
-
-
-  <main>
-    <div id="search" class="box">
-      <h3 class="title is-5">Search By City:</h3>
-      <form id="search-input"
-        class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-        <input id="city-input" class="input is-rounded" type="text" placeholder="Pick a city">
-        <button id="search-btn" class="button is-info is-outlined is-rounded">Search</button>
-
-      </form>
-    </div>
-    <div class="columns is-centered is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-      <div id="weather-box" class="column is-one-quarter box">
-        <div class="title is-4">Weather</div>
-        <div id="weather">
-          <div>City & Date</div>
-          <div>Forecast</div>
-          <div>Temperature</div>
-          <div>Wind Speed</div>
-          <div>Humidity</div>
+  <!-- <main> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 bg-light">
+        <!--search for a city-->
+        <h4 class="pt-2"><strong>Search for a City:</strong></h4>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="search-city" aria-label="City Search"
+            aria-describedby="search-button">
+          <div class="input-group-append">
+            <button class="btn bg-primary text-light" id="search-button"><i class="fa fa-search"></i></button>
+          </div>
         </div>
-
-        <div id="music" class="column box">
-          <div class="title is-4">Music</div>
-          <!-- <button class="button is-danger">Play</button>
-              <button class="button is-primary">Pause</button> -->
-        </div>
-        <div id="history" class="column is-one-quarter box">
-          <div class="title is-4">Previously Searched</div>
-          <!--clear history of searched cities-->
-                <button class="btn btn-primary" type="button" id="clear-history">Clear history</button>
-          <ul class="list-group">
-
-          </ul>
+        <!--clear history of searched cities-->
+        <button class="btn btn-primary" type="button" id="clear-history">Clear history</button>
+        <ul class="list-group">
+        </ul>
+      </div>
+      <div class="row ml-2 border border-dark rounded">
+        <div class="col-sm-12" id="current-weather">
+          <h3 class="city-name mb-1 mt-2 bolder" id="current-city"></h3>
+          <p>Temperature:<span class="current" id="temperature"></span></p>
+          <p>Wind Speed:<span class="current" id="wind-speed"></span></p>
+          <p>Humidity:<span class="current" id="humidity"></span></p>
+          <p>UV index:<span class="current bg-danger rounded py-1 px-2 text-white" id="uv-index"></span>
         </div>
       </div>
-      <div id="radar" class="box">
+      <div id="music" class="column box">
+        <div class="title is-4">Music
+          <div id="music">
+            <button class="button is-info">Play</button>
+            <button class="button is-primary">Pause</button>
+          </div>
+        </div>
+      </div>
+      <div id="radar" class="column box">
         <div id="radar-map" class="title is-4">Radar Map</div>
       </div>
-  </main>
-
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="assets/js/weather.js"></script>
-
+    </div>
+  </div>
+</body>
+<!-- </main> -->
+<!--used scripts-->
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="./assets/js/weather.js"></script>
+<script src="./assets/js/music.js"></script>
 </body>
 
 </html>

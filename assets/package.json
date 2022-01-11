@@ -1,0 +1,34 @@
+{
+    "name": "weathervibes",
+    "version": "1.0.0",
+    "description": "module for accessing the free music archive API",
+    "main": "music.js",
+    "dependencies": {
+        "request": "^2.57.0"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SepidehAyani/WeatheredVibes.git"
+    },
+    "keywords": [
+        "freemusicarchive",
+        "free",
+        "music",
+        "archive",
+        "api",
+        "open",
+        "open",
+        "music",
+        "creative",
+        "commons",
+        "mit",
+        "wfmu",
+        "nyc",
+        "radio",
+        "open",
+        "access",
+        "audio"
+    ],
+    "homepage": "https://github.com/SepidehAyani/WeatheredVibes#readme"
+}

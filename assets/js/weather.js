@@ -1,42 +1,79 @@
-var searchBtnEl = document.querySelector("#search-btn");
-var cityInputEl = document.querySelector("#city-input");
 
-var citySearchEl = document.querySelector("#search-input");
-var searchHistory = [];
+//variables
+var city = "";
+var searchCity = $("#search-city");
+var searchButton = $("#search-button");
+var clearButton = $("#clear-history");
+var currentCity = $("#current-city");
+var currentTempe = $("#temperature");
+var currentHumidty = $("#humidity");
+var currentWindSpeed = $("#wind-speed");
+var currentUvindex = $("#uv-index");
+var lookupCity = [];
 
-var city = [];
-var apiKey = "17046fe6ac243c48ab15eff676d280e3";
-var formSubmitHandler = function (event) {
-    // prevent page from refreshing
+//seach the available cities
+function findACity(c) {
+    for (var i = 0; i < lookupCity.length; i++) {
+        if (c.toUpperCase() === lookupCity[i]) {
+            return -1;
+        }
+    }
+    return 1;
+}
+// api key
+var APIKey = "069076e5d1f125b294df450d7c89ea92";
+
+//current weather
+function displayWeather(event) {
     event.preventDefault();
-    //get value from input element
-    var city = cityInputEl.value.trim();
-    if (city) {
-        searchCity(city);
-        //clear old content
-        cityInputEl.value = "";
-    } else {
-        console.log("Please enter a city");
+    if (searchCity.val().trim() !== "") {
+        city = searchCity.val().trim();
+        currentWeather(city);
     }
     saveSearch(city);
     
 }
-var searchCity = function (city) {
-    var apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
-    //make a get request to url
-    fetch(apiURL)
-        .then(function (response) {
-            //request was successful
-            if (response.ok) {
-                console.log(response);
-                response.json().then(function (data) {
-                    console.log(data);
-                    displayWeather(data);
-                });
-                /////need to make modals instead
-            } else {
-                console.log("Error: " + response.statusText);
+
+//using openWeatherMap data to access the weather directory with the given API to get the temp, wind speed, humidity and uv index
+function currentWeather(city) {
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    }).then(function (response) {
+        //weather icon
+        var weathericon = response.weather[0].icon;
+        var iconurl = "https://openweathermap.org/img/wn/" + weathericon + "@2x.png";
+        //date
+        var date = new Date(response.dt * 1000).toLocaleDateString();
+        $(currentCity).html(response.name + "(" + date + ")" + "<img src=" + iconurl + ">");
+        //temp
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        $(currentTempe).html((tempF).toFixed(2) + "&#8457");
+        $(currentHumidty).html(response.main.humidity + "%");
+        //wind speed
+        var ws = response.wind.speed;
+        var windsmph = (ws * 2.237).toFixed(1);
+        $(currentWindSpeed).html(windsmph + "MPH");
+        uvIndex(response.coord.lon, response.coord.lat);
+        if (response.cod == 200) {
+            lookupCity = JSON.parse(localStorage.getItem("cityname"));
+            console.log(lookupCity);
+            if (lookupCity == null) {
+                lookupCity = [];
+                lookupCity.push(city.toUpperCase()
+                );
+                localStorage.setItem("cityname", JSON.stringify(lookupCity));
+                addToList(city);
             }
+            else {
+                if (findACity(city) > 0) {
+                    lookupCity.push(city.toUpperCase());
+                    localStorage.setItem("cityname", JSON.stringify(lookupCity));
+                    addToList(city);
+                }
+            }
+<<<<<<< HEAD
         })
         .catch(function (error) {
             console.log("Unable to connect to OpenWeather");
@@ -93,12 +130,41 @@ function addToList(city) {
     console.log(city);
 }
 
+=======
+        }
+
+    });
+}
+
+//uv-index response.
+function uvIndex(ln, lt) {
+    var uvqURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lt + "&lon=" + ln;
+    $.ajax({
+        url: uvqURL,
+        method: "GET"
+    }).then(function (response) {
+        $(currentUvindex).html(response.value);
+    });
+}
+
+//add searched city to a list
+function addToList(c) {
+    var listEl = $("<li>" + c + "</li>");
+    $(listEl).attr("class", "list-group-item");
+    $(listEl).attr("data-value", c.toUpperCase());
+    $(".list-group").append(listEl);
+}
+>>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
 //past searched cities
 function invokePastSearch(event) {
     var liEl = event.target;
     if (event.target.matches("li")) {
         city = liEl.textContent.trim();
+<<<<<<< HEAD
         searchCity(city);
+=======
+        currentWeather(city);
+>>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
     }
 }
 
@@ -112,12 +178,19 @@ function loadlastCity() {
             addToList(sCity[i]);
         }
         city = sCity[i - 1];
+<<<<<<< HEAD
         searchCity(city);
     }
+=======
+        currentWeather(city);
+    }
+
+>>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
 }
 //clear history of searched cities
 function clearHistory(event) {
     event.preventDefault();
+<<<<<<< HEAD
     localStorage.removeItem("cityname");
     document.location.reload();
 }
@@ -130,3 +203,15 @@ citySearchEl.addEventListener("submit", formSubmitHandler);
     ////consider putting modal function under here....... (bulma or jquery)
 
 
+=======
+    lookupCity = [];
+    localStorage.removeItem("cityname");
+    document.location.reload();
+
+}
+//buttons
+$("#search-button").on("click", displayWeather);
+$(document).on("click", invokePastSearch);
+$(window).on("load", loadlastCity);
+$("#clear-history").on("click", clearHistory);
+>>>>>>> a2e6163 (fixed the local storage, changed the formatting and styling, introduce music api to work on it further)
