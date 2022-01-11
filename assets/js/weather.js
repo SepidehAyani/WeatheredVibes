@@ -2,6 +2,7 @@ var searchBtnEl = document.querySelector("#search-btn");
 var cityInputEl = document.querySelector("#city-input");
 
 var citySearchEl = document.querySelector("#search-input");
+var searchHistory = [];
 
 var city = [];
 var apiKey = "17046fe6ac243c48ab15eff676d280e3";
@@ -17,6 +18,8 @@ var formSubmitHandler = function (event) {
     } else {
         console.log("Please enter a city");
     }
+    saveSearch(city);
+    
 }
 var searchCity = function (city) {
     var apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
@@ -72,20 +75,30 @@ var displayWeather = function (data, city) {
 
 };
 
+// save to local storage 
+function saveSearch (city) {
+    var searchTerm = city;
+    searchHistory.push(searchTerm);
+    localStorage.setItem("cityname", JSON.stringify(searchHistory));
+    console.log(searchTerm);
+    addToList(city);
+}
 
 //add searched city to a list
-function addToList(c) {
-    var listEl = $("<li>" + c + "</li>");
+function addToList(city) {
+    var listEl = $("<li>" + city + "</li>");
     $(listEl).attr("class", "list-group-item");
-    $(listEl).attr("data-value", c.toUpperCase());
+    $(listEl).attr("data-value", city.toUpperCase());
     $(".list-group").append(listEl);
+    console.log(city);
 }
+
 //past searched cities
 function invokePastSearch(event) {
     var liEl = event.target;
     if (event.target.matches("li")) {
         city = liEl.textContent.trim();
-        currentWeather(city);
+        searchCity(city);
     }
 }
 
@@ -99,22 +112,20 @@ function loadlastCity() {
             addToList(sCity[i]);
         }
         city = sCity[i - 1];
-        currentWeather(city);
+        searchCity(city);
     }
-
 }
 //clear history of searched cities
 function clearHistory(event) {
     event.preventDefault();
-    lookupCity = [];
     localStorage.removeItem("cityname");
     document.location.reload();
-
 }
 
 
 $(document).on("click", invokePastSearch);
-
+$(window).on("load", loadlastCity);
+$("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
     ////consider putting modal function under here....... (bulma or jquery)
 
