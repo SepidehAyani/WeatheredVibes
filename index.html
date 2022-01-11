@@ -37,19 +37,18 @@
   </header>
   <!-- <main> -->
   <div class="container">
-    <!-- <div class="row"> -->
     <div class="col-sm-4 bg-light">
       <!--search for a city-->
-      <h3 class="title is-5"><strong>Search for a City:</strong></h3>
-      <form class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
-        <input type="text" class="form-control" id="search-city" aria-label="City Search"
-          aria-describedby="search-button">
+       <p class="control is-expanded has-icons-right">
+        <form class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
+          <input class="input" type="search" class="form-control" id="search-city" aria-label="City Search"
+          aria-describedby="search-button"/>
         <div class="input-group-append is-rounded">
           <button class="button is-info is-outlined is-rounded" id="search-button"><i class="fa fa-search"></i></button>
         </div>
       </form>
       <!--clear history of searched cities-->
-      <button class="btn btn-primary" type="button" id="clear-history">Clear history</button>
+      <button class="button is-info"type="button" id="clear-history">Clear history</button>
       <ul class="list-group">
       </ul>
     </div>
