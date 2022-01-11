@@ -39,7 +39,7 @@ var searchCity = function (city) {
             console.log("Unable to connect to OpenWeather");
         });
 };
-//// this will go into a different feature
+
 var displayWeather = function (data, city) {
 
     console.log(data.main);
@@ -71,5 +71,51 @@ var displayWeather = function (data, city) {
     currentWeatherEl.appendChild(humidityEl);
 
 };
+
+
+//add searched city to a list
+function addToList(c) {
+    var listEl = $("<li>" + c + "</li>");
+    $(listEl).attr("class", "list-group-item");
+    $(listEl).attr("data-value", c.toUpperCase());
+    $(".list-group").append(listEl);
+}
+//past searched cities
+function invokePastSearch(event) {
+    var liEl = event.target;
+    if (event.target.matches("li")) {
+        city = liEl.textContent.trim();
+        currentWeather(city);
+    }
+}
+
+//loading last searched city
+function loadlastCity() {
+    $("ul").empty();
+    var sCity = JSON.parse(localStorage.getItem("cityname"));
+    if (sCity !== null) {
+        sCity = JSON.parse(localStorage.getItem("cityname"));
+        for (i = 0; i < sCity.length; i++) {
+            addToList(sCity[i]);
+        }
+        city = sCity[i - 1];
+        currentWeather(city);
+    }
+
+}
+//clear history of searched cities
+function clearHistory(event) {
+    event.preventDefault();
+    lookupCity = [];
+    localStorage.removeItem("cityname");
+    document.location.reload();
+
+}
+
+
+$(document).on("click", invokePastSearch);
+
 citySearchEl.addEventListener("submit", formSubmitHandler);
     ////consider putting modal function under here....... (bulma or jquery)
+
+
