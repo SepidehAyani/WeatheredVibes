@@ -5,7 +5,8 @@
 ## Used Libraries
 
 1. [Open Weather Map API](https://openweathermap.org/api/one-call-api)
-2. [News Api](https://newsapi.org/)
+2. [TOMTOM API](https://developer.tomtom.com/map-display-api/documentation/product-information/introduction)
+2. [News API](https://newsapi.org/)
 3. [JavaScript](https://www.javascript.com/)
 4. [HTML](https://html.com/)
 5. [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
