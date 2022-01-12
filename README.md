@@ -5,10 +5,11 @@
 ## Used Libraries
 
 1. [Open Weather Map API](https://openweathermap.org/api/one-call-api)
-2. [JavaScript](https://www.javascript.com/)
-3. [HTML](https://html.com/)
-4. [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-5. [jQuery](https://jquery.com/)
+2. [News Api](https://newsapi.org/)
+3. [JavaScript](https://www.javascript.com/)
+4. [HTML](https://html.com/)
+5. [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+6. [jQuery](https://jquery.com/)
 ## Homepage
 
 ![plot](/assets/images/homepage.png)
