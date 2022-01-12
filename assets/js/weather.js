@@ -1,8 +1,10 @@
 var searchBtnEl = document.querySelector("#search-btn");
 var cityInputEl = document.querySelector("#city-input");
 
+
 var citySearchEl = document.querySelector("#search-input");
 var searchHistory = [];
+
 
 var city = [];
 var apiKey = "17046fe6ac243c48ab15eff676d280e3";
@@ -18,8 +20,10 @@ var formSubmitHandler = function (event) {
     } else {
         console.log("Please enter a city");
     }
+
     saveSearch(city);
     
+
 }
 var searchCity = function (city) {
     var apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
@@ -43,6 +47,7 @@ var searchCity = function (city) {
         });
 };
 
+//// this will go into a different feature
 var displayWeather = function (data, city) {
 
     console.log(data.main);
@@ -72,6 +77,7 @@ var displayWeather = function (data, city) {
     currentWeatherEl.appendChild(currentConditionsEl);
     currentWeatherEl.appendChild(windEl);
     currentWeatherEl.appendChild(humidityEl);
+
 
 };
 
@@ -128,5 +134,6 @@ $(window).on("load", loadlastCity);
 $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
     ////consider putting modal function under here....... (bulma or jquery)
+
 
 
