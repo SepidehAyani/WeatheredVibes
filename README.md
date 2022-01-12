@@ -11,11 +11,11 @@
 5. [jQuery](https://jquery.com/)
 ## Homepage
 
-![plot](/Assets/images/homepage.png)
+![plot](/assets/images/homepage.png)
 
 ## Demo
 
-[![Watch the demo](/Assets/images/demo.png)](/Assets/images/demo.mov)
+[![Watch the demo](/assets/images/demo.png)](/assets/images/demo.mov)
 
 ## Contributers
 - [Kevin](https://github.com/Kawilder)
