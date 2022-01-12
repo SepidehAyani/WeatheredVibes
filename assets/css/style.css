@@ -17,6 +17,9 @@
 
 #search {
     background-color:rgb(175, 224, 248);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 #search-input {
@@ -42,13 +45,13 @@
     margin: 10px;
 }
 
-.title {
-    color: white;
+.list-group {
+    color: rgb(54, 54, 102);
+    padding: 5px;
 }
 
-#radar {
-    background-color: rgb(217, 227, 235);
-    margin: 10px;
+.title {
+    color: white;
 }
 
 #radar-map {
@@ -62,4 +65,9 @@
     font-family: "Roboto", sans-serif;
     box-sizing: border-box;
     overflow:visible;
+    margin-left: 65px;
+    margin-right: 65px;
+    margin-bottom: 100px;
+    height: 400px;
+    width: auto;
 }
