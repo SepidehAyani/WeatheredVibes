@@ -16,6 +16,7 @@ Weathered Vibes is an application that lets a user look up a city and get the cu
 4. [HTML](https://html.com/)
 5. [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 6. [jQuery](https://jquery.com/)
+7. [Bulma](https://bulma.io/)
 ## Homepage
 
 ![plot](/assets/images/homepage.png)
@@ -23,6 +24,10 @@ Weathered Vibes is an application that lets a user look up a city and get the cu
 ## Demo
 
 [![Watch the demo](/assets/images/demo.png)](/assets/images/demo.mov)
+
+## Webiste
+Deployed Project: ()
+Repository: (https://github.com/SepidehAyani/WeatheredVibes)
 
 ## Contributers
 - [Kevin](https://github.com/Kawilder)
