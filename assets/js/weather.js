@@ -8,6 +8,7 @@ var searchHistory = [];
 
 var city = [];
 var apiKey = "17046fe6ac243c48ab15eff676d280e3";
+var UofM = [-93.22770, 44.974 ]
 var formSubmitHandler = function (event) {
     // prevent page from refreshing
     event.preventDefault();
@@ -133,7 +134,60 @@ $(document).on("click", invokePastSearch);
 $(window).on("load", loadlastCity);
 $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
-    ////consider putting modal function under here....... (bulma or jquery)
+    
+//initial map loading
+var tomTomMap;
+tomTomMap = tt.map({
+    key:"PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
+    container: "map",
+    center: UofM,
+    zoom: 7.5
+});
+//map search
+var handelResults = function(result) {
+    console.log(result);
+}
+var search = function() {
+    tt.services.fuzzySearch({key:"PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
+        .go()
+        .then(function centerAndZoom(response) {
+            tomTomMap.flyTo({ center: response.results[0].position, zoom: 7 });
+        })
+        .catch(function(error) {
+            alert("Could not find location (" + cityInputEl + "). " + error.message);
 
-
-
+        });
+};
+       
+// weather layers
+// 2 second delay added
+setTimeout(function() {
+    tomTomMap.addSource("owm_source", {
+    type: "raster",
+    tiles: ["https://tile.openweathermap.org/map/layer/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tileSize: 10000,
+        minZoom: 0,
+        maxZoom: 12,
+        attribution: "openWeatherMapAttribution",
+    });
+    tomTomMap.addLayer({
+        'id': 'owm_layer',
+        'type': 'raster',
+        'source': 'owm_source',
+        'layout': { 'visibility': 'visible' }
+    });
+}, 2500);
+        
+currentWeatherData( {
+    appid: "https://tile.openweathermap.org/map/layer/z/x/y.png?appid=09f252a8b9d0c9071a537e314433b7e1",
+    lat: x,
+    lon: y,
+    units: 'imperial'
+})
+.go()
+.then(function(response) {
+    console.log(response.weather[0].description);
+})
+.catch(function(error) {
+    console.log(error);
+});
