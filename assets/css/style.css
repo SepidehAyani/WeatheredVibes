@@ -1,7 +1,7 @@
 .hero {
-    background-image: url("../images/weatherbanner.png");
-    background-size:cover;
-    background-position: center;
+  background-image: url("../images/weatherbanner.png");
+  background-size: cover;
+  background-position: center;
 }
 
 #hero {
@@ -12,22 +12,22 @@
 }
 
 .subtitle {
-    text-align: center;
+  text-align: center;
 }
 
 #search {
-    background-color:rgb(175, 224, 248);
+  background-color: rgb(175, 224, 248);
 }
 
 #search-input {
-    margin: 20px;
+  margin: 20px;
 }
 
 #weather-box {
-    text-align: center;
-    background-color: rgba(32, 39, 133, 0.884);
-    color: white;
-    margin: 10px;
+  text-align: center;
+  background-color: rgba(32, 39, 133, 0.884);
+  color: white;
+  margin: 10px;
 }
 
 #news {
@@ -37,29 +37,29 @@
 }
 
 #history {
-    text-align: center;
-    background-color: rgba(175, 213, 248, 0.801);
-    margin: 10px;
+  text-align: center;
+  background-color: rgba(175, 213, 248, 0.801);
+  margin: 10px;
 }
 
 .title {
-    color: white;
+  color: white;
 }
 
 #radar {
-    background-color: rgb(217, 227, 235);
-    margin: 10px;
+  background-color: rgb(217, 227, 235);
+  margin: 10px;
 }
 
 #radar-map {
-    background-color: #D9E3EB;
-    color:rgb(54, 54, 102);
-    text-align: center;
-    overflow:visible;
+  background-color: #d9e3eb;
+  color: rgb(54, 54, 102);
+  text-align: center;
+  overflow: visible;
 }
 
 #map {
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
-    overflow:visible;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  overflow: visible;
 }
