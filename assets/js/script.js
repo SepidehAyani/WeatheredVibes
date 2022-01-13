@@ -112,8 +112,8 @@ var displayWeather = function (data) {
     var humidityEl = document.createElement("ul");
     humidityEl.innerHTML = '<strong>Humidity: </strong>' + data.main.humidity;
     currentWeatherEl.appendChild(cityDateEl);
-    currentWeatherEl.appendChild(tempEl);
     currentWeatherEl.appendChild(currentConditionsEl);
+    currentWeatherEl.appendChild(tempEl);
     currentWeatherEl.appendChild(windEl);
     currentWeatherEl.appendChild(humidityEl);
 };
