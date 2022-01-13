@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     var city = cityInputEl.value.trim();
     if (city) {
         searchCity(city);
-        displayNews();
+        displayNews(city);
         //clear old content
         cityInputEl.value = "";
     } else {
@@ -46,10 +46,8 @@ var searchCity = function (city) {
 };
 
 // display news data
-function displayNews() {
-    var newsUrl = 'https://newsapi.org/v2/top-headlines?' +
-        'country=us&' +
-        'apiKey=89c056c784084770b1d730594d6a1e6c';
+function displayNews(input) {
+    var newsUrl = `https://gnews.io/api/v4/search?q=${input}&token=dc689af2927e8b88560a240eaf291ca4`;
     var newsRequest = new Request(newsUrl);
     const newsResponsePromise = fetch(newsRequest);
 
@@ -58,27 +56,26 @@ function displayNews() {
 
         newsDataPromise.then(function (newsDataJson) {
             const articleIndex = Math.floor(Math.random() * newsDataJson.articles.length);
-            const firstNewsItem = newsDataJson.articles[articleIndex];
-            console.log(firstNewsItem);
+            const newsItem = newsDataJson.articles[articleIndex];
 
             var currentNewsEl = document.querySelector("#news-box");
             currentNewsEl.innerHTML = "";
 
             var newsTitleEl = document.createElement("div");
-            newsTitleEl.textContent = "Title: " + firstNewsItem.title;
+            newsTitleEl.innerHTML = '<strong>Title: </strong>' + newsItem.title;
 
             var newsContentEl = document.createElement("div");
-            newsContentEl.textContent = "Content: " + firstNewsItem.content;
+            newsContentEl.innerHTML = '<strong>Description: </strong>' + newsItem.description;
 
             var newsAuthorEl = document.createElement("div");
-            newsAuthorEl.textContent = "Author: " + firstNewsItem.author;
+            newsAuthorEl.innerHTML = '<strong>Source: </strong>' + newsItem.source.name;
 
             var newsPublishedAtEl = document.createElement("div");
-            newsPublishedAtEl.textContent = "Published At: " + firstNewsItem.publishedAt;
+            newsPublishedAtEl.innerHTML = '<strong>Published At: </strong>' + newsItem.publishedAt;
 
             var newsUrl = document.createElement("a");
-            newsUrl.textContent = 'Read More Here';
-            newsUrl.href = firstNewsItem.url;
+            newsUrl.innerHTML = '<strong>Read More Here </strong>' ;
+            newsUrl.href = newsItem.url;
             newsUrl.target = "_blank";
 
             currentNewsEl.appendChild(newsTitleEl);
@@ -107,13 +104,13 @@ var displayWeather = function (data) {
     var cityDateEl = document.createElement("ul");
     cityDateEl.textContent = data.name + " " + dt;
     var tempEl = document.createElement("ul");
-    tempEl.textContent = "Current Temp: " + data.main.temp + " \u00B0F";
+    tempEl.innerHTML = '<strong>Current Temp: </strong>' + data.main.temp + " \u00B0F";
     var currentConditionsEl = document.createElement("ul");
     currentConditionsEl.textContent = data.weather[0].main;
     var windEl = document.createElement("ul");
-    windEl.textContent = "Wind Speed: " + data.wind.speed + " m/s";
+    windEl.innerHTML = '<strong>Wind Speed: </strong>' + data.wind.speed + ' m/s';
     var humidityEl = document.createElement("ul");
-    humidityEl.textContent = "Humidity: " + data.main.humidity;
+    humidityEl.innerHTML = '<strong>Humidity: </strong>' + data.main.humidity;
     currentWeatherEl.appendChild(cityDateEl);
     currentWeatherEl.appendChild(tempEl);
     currentWeatherEl.appendChild(currentConditionsEl);

@@ -32,6 +32,9 @@
   color: white;
   margin: 10px;
 }
+#weather-box strong {
+  color: white;
+}
 
 #news {
     text-align: center;
