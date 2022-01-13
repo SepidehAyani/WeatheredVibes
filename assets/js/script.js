@@ -172,59 +172,91 @@ $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
 
 //initial map loading
-var tomTomMap;
-tomTomMap = tt.map({
+var map = tt.map({
     key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
     container: "map",
     center: UofM,
     zoom: 7.5
 });
 
+// weather layers
+// 2 second delay added
+setTimeout(function() {
+    var rainSource = {
+        type: "raster",
+        tiles: ["https://tile.openweathermap.org/map/rain_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tileSize: 256,
+        minZoom: 0,
+        maxZoom: 12,
+        attribution: "openWeatherMap,org",
+    };
+    var rainLayer = {
+        'id': 'rain_layer',
+        'type': 'raster',
+        'source': 'rain_source',
+        'layout': { 'visibility': 'visible' }
+    };
+}, 2000);
+
+setTimeout(function() {
+    var cloudSource = {
+        type: "raster",
+        tiles: ["https://tile.openweathermap.org/map/cloud_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tileSize: 256,
+        minZoom: 0,
+        maxZoom: 12,
+        attribution: "openWeatherMap",
+    };
+    var cloudLayer = {
+        'id': 'cloud_layer',
+        'type': 'raster',
+        'source': 'cloud_source',
+        'layout': { 'visibility': 'visible' }
+    };
+}, 2000);
+
+setTimeout(function() {
+    var windSource = {
+        type: "raster",
+        tiles: ["https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tileSize: 256,
+        minZoom: 0,
+        maxZoom: 12,
+        attribution: "openWeatherMap",
+    };
+    var windLayer = {
+        'id': 'wind_layer',
+        'type': 'raster',
+        'source': 'wind_source',
+        'layout': { 'visibility': 'visible' }
+    };
+}, 2000);
+
+setTimeout(function() {
+    map.on("load", function() {
+        map.addSource("rain_source", rainSource)
+        map.addLayer(rainLayer)
+
+        map.addSource("cloud_source", cloudSource)
+        map.addLayer(cloudLayer)
+
+        map.addSource("wind_source", windSource)
+        map.addLayer(windLayer)
+    });
+}, 2500);
+
+
 //map search
 var handelResults = function (result) {
     console.log(result);
 }
-var search = function () {
-    tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
-        .go()
-        .then(function centerAndZoom(response) {
-            tomTomMap.flyTo({ center: response.results[0].position, zoom: 7 });
-        })
-        .catch(function (error) {
-            alert("Could not find location (" + cityInputEl + "). " + error.message);
-
-        });
-};
-
-// weather layers
-// 2 second delay added
-setTimeout(function () {
-    tomTomMap.addSource("owm_source", {
-        type: "raster",
-        tiles: ["https://tile.openweathermap.org/map/layer/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
-        tileSize: 10000,
-        minZoom: 0,
-        maxZoom: 12,
-        attribution: "openWeatherMapAttribution",
-    });
-    tomTomMap.addLayer({
-        'id': 'owm_layer',
-        'type': 'raster',
-        'source': 'owm_source',
-        'layout': { 'visibility': 'visible' }
-    });
-}, 2500);
-
-currentWeatherData({
-    appid: "https://tile.openweathermap.org/map/layer/z/x/y.png?appid=09f252a8b9d0c9071a537e314433b7e1",
-    lat: x,
-    lon: y,
-    units: 'imperial'
-})
+tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
     .go()
-    .then(function (response) {
-        console.log(response.weather[0].description);
+    .then(function centerAndZoom(response) {
+        map.flyTo({ center: response.results[0].position, zoom: 7 });
     })
     .catch(function (error) {
-        console.log(error);
+        alert("Could not find location (" + cityInputEl + "). " + error.message);
+
     });
+
