@@ -34,6 +34,7 @@ var searchCity = function (city) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayWeather(data);
+                    weatherMap(data);
                 });
                 /////need to make modals instead
             } else {
@@ -175,59 +176,29 @@ $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
 
 //initial map loading
-var tomTomMap;
-tomTomMap = tt.map({
-    key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
-    container: "map",
-    center: UofM,
-    zoom: 7.5
-});
+var weatherMap = function (data) {
+    var apiKey = '976604eaf8a4b2248a8f6d76062658a9';
+    var apiUrl = 'http://maps.openweathermap.org/maps/2.0/weather/PR0/8/' + longitude + '/' + latitude + '?appid=' + apiKey;
+    var longitude = data.coord.lon;
+    var latitude = data.coord.lat;
 
-//map search
-var handelResults = function (result) {
-    console.log(result);
-}
-var search = function () {
-    tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
-        .go()
-        .then(function centerAndZoom(response) {
-            tomTomMap.flyTo({ center: response.results[0].position, zoom: 7 });
+    fetch(apiUrl)
+        .then(function(response) {
+
         })
-        .catch(function (error) {
-            alert("Could not find location (" + cityInputEl + "). " + error.message);
-
+        .catch(function(error) {
+            console.log("Unable to connect to Open Weather Map");
         });
+
+    console.log(longitude);
+    console.log(latitude);
+
+    var map = L.map('map',{minZoom: 3}).setView([0,0], 3);
+
+    L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=4pATqKTD2AGLk1KXutiy', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    }).addTo(map);
+    $("map").appendTo("#map");
 };
 
-// weather layers
-// 2 second delay added
-setTimeout(function () {
-    tomTomMap.addSource("owm_source", {
-        type: "raster",
-        tiles: ["https://tile.openweathermap.org/map/layer/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
-        tileSize: 10000,
-        minZoom: 0,
-        maxZoom: 12,
-        attribution: "openWeatherMapAttribution",
-    });
-    tomTomMap.addLayer({
-        'id': 'owm_layer',
-        'type': 'raster',
-        'source': 'owm_source',
-        'layout': { 'visibility': 'visible' }
-    });
-}, 2500);
-
-currentWeatherData({
-    appid: "https://tile.openweathermap.org/map/layer/z/x/y.png?appid=09f252a8b9d0c9071a537e314433b7e1",
-    lat: x,
-    lon: y,
-    units: 'imperial'
-})
-    .go()
-    .then(function (response) {
-        console.log(response.weather[0].description);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+weatherMap();
