@@ -28,18 +28,24 @@
 
 #weather-box {
   text-align: center;
-  background-color: rgba(32, 39, 133, 0.884);
+  background-color: rgba(55, 61, 148, 0.884);
   color: white;
+  font-weight: bold;
   margin: 10px;
-}
-#weather-box strong {
-  color: white;
 }
 
 #news {
     text-align: center;
     background-color: rgba(110, 180, 245, 0.801);
     margin: 10px;
+}
+#news-box {
+    color: white;
+    font-weight:bold;
+}
+
+#news-box a {
+    text-align: center;
 }
 
 #history {
@@ -50,7 +56,12 @@
 
 .list-group {
     color: rgb(54, 54, 102);
+    font-weight: bold;
     padding: 5px;
+}
+
+.list-group-item:hover {
+    background-color: white;
 }
 
 .title {
