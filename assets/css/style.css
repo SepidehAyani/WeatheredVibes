@@ -5,7 +5,9 @@
 }
 
 #hero {
-    font-family: cursive;
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Staatliches', cursive;
+    font-size:100px;
     text-align: center;
     color: rgb(54, 54, 102);
     background-color: rgba(253, 254, 255, 0.527);
