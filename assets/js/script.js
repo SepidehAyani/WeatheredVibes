@@ -32,7 +32,6 @@ var searchCity = function (city) {
             if (response.ok) {
                 console.log(response);
                 response.json().then(function (data) {
-                    console.log(data);
                     displayWeather(data);
                 });
                 /////need to make modals instead
@@ -89,14 +88,6 @@ function displayNews(input) {
 
 // this will go into a different feature
 var displayWeather = function (data) {
-    console.log(data.main);
-    console.log(data.dt); //date
-    console.log(data.main.temp); ///temp
-    console.log(data.weather);
-    console.log(data.wind.speed);//wind speed
-    console.log(data.main.humidity); //humidity
-    console.log(data.weather[0].main);//current condtions
-    console.log(data.name);///city name
     var dt = new Date(data.dt * 1000);
     console.log(dt.toDateString());
     var currentWeatherEl = document.querySelector("#weather");
@@ -123,7 +114,6 @@ function saveSearch(city) {
     var searchTerm = city;
     searchHistory.push(searchTerm);
     localStorage.setItem("cityname", JSON.stringify(searchHistory));
-    console.log(searchTerm);
     addToList(city);
 }
 
@@ -180,7 +170,6 @@ var searchMap = function () {
         .go()
         .then(function centerAndZoom(response) {
             tomTomMap.flyTo({ center: response.results[0].position, zoom: 7 });
-            console.log(response)
         })
         .catch(function (error) {
             alert("Could not find location (" + cityInputEl.value + "). " + error.message);
