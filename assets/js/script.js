@@ -98,6 +98,8 @@ var displayWeather = function (data) {
     console.log(data.weather[0].main);//current condtions
     console.log(data.name);///city name
     var dt = new Date(data.dt * 1000);
+    var weatherIcon = data.weather[0].icon;
+    var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
     console.log(dt.toDateString());
     var currentWeatherEl = document.querySelector("#weather");
     currentWeatherEl.innerHTML = "";
@@ -105,13 +107,16 @@ var displayWeather = function (data) {
     cityDateEl.textContent = data.name + " " + dt;
     var tempEl = document.createElement("ul");
     tempEl.innerHTML = '<strong>Current Temp: </strong>' + data.main.temp + " \u00B0F";
+    var weatherIconEl = document.createElement("ul");
+    weatherIconEl.innerHTML = '<img src=' + iconURL + '>';
     var currentConditionsEl = document.createElement("ul");
-    currentConditionsEl.innerHTML = '<img src="http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"></img>' + data.weather[0].main;
+    currentConditionsEl.textContent = data.weather[0].main;
     var windEl = document.createElement("ul");
     windEl.innerHTML = '<strong>Wind Speed: </strong>' + data.wind.speed + ' m/s';
     var humidityEl = document.createElement("ul");
     humidityEl.innerHTML = '<strong>Humidity: </strong>' + data.main.humidity;
     currentWeatherEl.appendChild(cityDateEl);
+    currentWeatherEl.appendChild(weatherIconEl);
     currentWeatherEl.appendChild(currentConditionsEl);
     currentWeatherEl.appendChild(tempEl);
     currentWeatherEl.appendChild(windEl);
