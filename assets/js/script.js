@@ -106,7 +106,7 @@ var displayWeather = function (data) {
     var tempEl = document.createElement("ul");
     tempEl.innerHTML = '<strong>Current Temp: </strong>' + data.main.temp + " \u00B0F";
     var currentConditionsEl = document.createElement("ul");
-    currentConditionsEl.textContent = data.weather[0].main;
+    currentConditionsEl.innerHTML = '<img src="http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"></img>' + data.weather[0].main;
     var windEl = document.createElement("ul");
     windEl.innerHTML = '<strong>Wind Speed: </strong>' + data.wind.speed + ' m/s';
     var humidityEl = document.createElement("ul");
