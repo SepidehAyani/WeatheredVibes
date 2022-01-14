@@ -132,22 +132,21 @@ $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
 
 
+//setting constants
 const ids = {
     html: {
     map: "map",
     location: "city-input",
     }
 };
-
 const tomTom = {
     key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
     map: null,
-    popup: null,
     searchZoom: 11
 };
 
 //initial map loading
-const map = tt.map({
+var map = tt.map({
     key: tomTom.key,
     container: "map",
     center: UofM,
@@ -155,7 +154,8 @@ const map = tt.map({
 });
 
 // weather layers
-// 2 second delay added
+// half second delay added
+// precipitation layer
 setTimeout(function() {
     map.addSource("precipitation_source", {
         type: "raster",
@@ -171,8 +171,9 @@ setTimeout(function() {
         "source": "precipitation_source",
         "layout": { "visibility": "visible" }
     });
-}, 3000);
+}, 500);
 
+//Cloud coverage layer
 setTimeout(function() {
     map.addSource("clouds_source", {
         type: "raster",
@@ -188,8 +189,9 @@ setTimeout(function() {
         "source": "clouds_source",
         "layout": { "visibility": "visible" }
     });
-}, 3000);
+}, 500);
 
+//Wind speed layer
 setTimeout(function() {
     map.addSource("wind_source", {
         type: "raster",
@@ -205,36 +207,29 @@ setTimeout(function() {
         "source": "wind_source",
         "layout": { "visibility": "visible" }
     });
-}, 3000);
+}, 500);
 
-//map search
+//map search (not woking)
 function centerAndZoom(response) {
     const location = getLocation(response);
     if (location != null)
-        tomTom.map.flyTo({ center: response.results[0].position, zoom: tomTom.searchZoom });
+        tomTom.map.flyTo({ center: location.position, zoom: tomTom.searchZoom });
 }
 
-function findLocation() {
+function findLoaction() {
     const queryText = getValue(ids.html.location);
 
     tt.services.fuzzySearch({ key: tomTom.key, query: queryText })
         .go()
         .then(centerAndZoom)
         .catch(function (error) {
-            console.log("Could not find location (" + queryText + "). " + error.message);
+            alert("Could not find location (" + queryText + "). " + error.message);
     });
+};
+
+var handelResults = function (result) {
+    console.log(result);
 }
 
-function getLocation(response) {
-    if (response.results.length > 0)
-        return response.results[0];
- 
-   alert('Could not find location.');
-   return null;
-}
-
-
-function getValue(elementId) {
-    return document.getElementById(elementId).value;
-}
+ var queryText = document.querySelector("city-input");
 
