@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
   <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/maps/maps-web.min.js"></script>
   <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
-  
   <title>Weathered Vibes</title>
 </head>
 
@@ -34,7 +31,7 @@
       <form id="search-input"
         class="columns is-variable is-1-mobile is-0-tablet is-3-desktop is-8-widescreen is-2-fullhd">
         <input id="city-input" class="input is-rounded" type="text" placeholder="Pick a city">
-        <button id="search-btn" class="button is-info is-outlined is-rounded">Search</button>
+        <button id="search-btn" class="button is-info is-outlined is-rounded" onclick="findLocation()" >Search</button>
 
       </form>
     </div>
@@ -80,6 +77,7 @@
 
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="assets/js/script.js"></script>
+
 </body>
 
 </html>

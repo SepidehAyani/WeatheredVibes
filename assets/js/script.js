@@ -5,6 +5,7 @@ var searchHistory = [];
 var city = [];
 var apiKey = "17046fe6ac243c48ab15eff676d280e3";
 var UofM = [-93.22770, 44.974]
+var value = []
 
 var formSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -34,7 +35,6 @@ var searchCity = function (city) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayWeather(data);
-                    weatherMap(data);
                 });
                 /////need to make modals instead
             } else {
@@ -46,47 +46,6 @@ var searchCity = function (city) {
         });
 };
 
-// display news data
-function displayNews(input) {
-    var newsUrl = `https://gnews.io/api/v4/search?q=${input}&token=dc689af2927e8b88560a240eaf291ca4`;
-    var newsRequest = new Request(newsUrl);
-    const newsResponsePromise = fetch(newsRequest);
-
-    newsResponsePromise.then(function (response) {
-        const newsDataPromise = response.json();
-
-        newsDataPromise.then(function (newsDataJson) {
-            const articleIndex = Math.floor(Math.random() * newsDataJson.articles.length);
-            const newsItem = newsDataJson.articles[articleIndex];
-
-            var currentNewsEl = document.querySelector("#news-box");
-            currentNewsEl.innerHTML = "";
-
-            var newsTitleEl = document.createElement("div");
-            newsTitleEl.innerHTML = '<strong>Title: </strong>' + newsItem.title;
-
-            var newsContentEl = document.createElement("div");
-            newsContentEl.innerHTML = '<strong>Description: </strong>' + newsItem.description;
-
-            var newsAuthorEl = document.createElement("div");
-            newsAuthorEl.innerHTML = '<strong>Source: </strong>' + newsItem.source.name;
-
-            var newsPublishedAtEl = document.createElement("div");
-            newsPublishedAtEl.innerHTML = '<strong>Published At: </strong>' + newsItem.publishedAt;
-
-            var newsUrl = document.createElement("a");
-            newsUrl.innerHTML = '<strong>Read More Here </strong>' ;
-            newsUrl.href = newsItem.url;
-            newsUrl.target = "_blank";
-
-            currentNewsEl.appendChild(newsTitleEl);
-            currentNewsEl.appendChild(newsContentEl);
-            currentNewsEl.appendChild(newsAuthorEl);
-            currentNewsEl.appendChild(newsPublishedAtEl);
-            currentNewsEl.appendChild(newsUrl);
-        })
-    })
-}
 
 // this will go into a different feature
 var displayWeather = function (data) {
@@ -172,10 +131,24 @@ $(window).on("load", loadlastCity);
 $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
 
-//initial map loading
-<<<<<<< HEAD
-var map = tt.map({
+
+const ids = {
+    html: {
+    map: "map",
+    location: "city-input",
+    }
+};
+
+const tomTom = {
     key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
+    map: null,
+    popup: null,
+    searchZoom: 11
+};
+
+//initial map loading
+const map = tt.map({
+    key: tomTom.key,
     container: "map",
     center: UofM,
     zoom: 7.5
@@ -184,109 +157,84 @@ var map = tt.map({
 // weather layers
 // 2 second delay added
 setTimeout(function() {
-    var rainSource = {
+    map.addSource("precipitation_source", {
         type: "raster",
-        tiles: ["https://tile.openweathermap.org/map/rain_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tiles: ["https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
         tileSize: 256,
         minZoom: 0,
         maxZoom: 12,
-        attribution: "openWeatherMap,org",
-    };
-    var rainLayer = {
-        'id': 'rain_layer',
-        'type': 'raster',
-        'source': 'rain_source',
-        'layout': { 'visibility': 'visible' }
-    };
-}, 2000);
+        attribution: "openWeatherMap.org",
+    });
+    map.addLayer({
+        "id": "precipitation_layer",
+        "type": "raster",
+        "source": "precipitation_source",
+        "layout": { "visibility": "visible" }
+    });
+}, 3000);
 
 setTimeout(function() {
-    var cloudSource = {
+    map.addSource("clouds_source", {
         type: "raster",
-        tiles: ["https://tile.openweathermap.org/map/cloud_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
+        tiles: ["https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
         tileSize: 256,
         minZoom: 0,
         maxZoom: 12,
-        attribution: "openWeatherMap",
-    };
-    var cloudLayer = {
-        'id': 'cloud_layer',
-        'type': 'raster',
-        'source': 'cloud_source',
-        'layout': { 'visibility': 'visible' }
-    };
-}, 2000);
+        attribution: "openWeatherMap.org",
+    });
+    map.addLayer({
+        "id": "clouds_layer",
+        "type": "raster",
+        "source": "clouds_source",
+        "layout": { "visibility": "visible" }
+    });
+}, 3000);
 
 setTimeout(function() {
-    var windSource = {
+    map.addSource("wind_source", {
         type: "raster",
         tiles: ["https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
         tileSize: 256,
         minZoom: 0,
         maxZoom: 12,
-        attribution: "openWeatherMap",
-    };
-    var windLayer = {
-        'id': 'wind_layer',
-        'type': 'raster',
-        'source': 'wind_source',
-        'layout': { 'visibility': 'visible' }
-    };
-}, 2000);
-
-setTimeout(function() {
-    map.on("load", function() {
-        map.addSource("rain_source", rainSource)
-        map.addLayer(rainLayer)
-
-        map.addSource("cloud_source", cloudSource)
-        map.addLayer(cloudLayer)
-
-        map.addSource("wind_source", windSource)
-        map.addLayer(windLayer)
+        attribution: "openWeatherMap.org",
     });
-}, 2500);
-
+    map.addLayer({
+        "id": "wind_layer",
+        "type": "raster",
+        "source": "wind_source",
+        "layout": { "visibility": "visible" }
+    });
+}, 3000);
 
 //map search
-var handelResults = function (result) {
-    console.log(result);
+function centerAndZoom(response) {
+    const location = getLocation(response);
+    if (location != null)
+        tomTom.map.flyTo({ center: response.results[0].position, zoom: tomTom.searchZoom });
 }
-tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
-    .go()
-    .then(function centerAndZoom(response) {
-        map.flyTo({ center: response.results[0].position, zoom: 7 });
-    })
-    .catch(function (error) {
-        alert("Could not find location (" + cityInputEl + "). " + error.message);
 
+function findLocation() {
+    const queryText = getValue(ids.html.location);
+
+    tt.services.fuzzySearch({ key: tomTom.key, query: queryText })
+        .go()
+        .then(centerAndZoom)
+        .catch(function (error) {
+            console.log("Could not find location (" + queryText + "). " + error.message);
     });
+}
 
-=======
-var weatherMap = function (data) {
-    var apiKey = '976604eaf8a4b2248a8f6d76062658a9';
-    var apiUrl = 'http://maps.openweathermap.org/maps/2.0/weather/PR0/8/' + longitude + '/' + latitude + '?appid=' + apiKey;
-    var longitude = data.coord.lon;
-    var latitude = data.coord.lat;
+function getLocation(response) {
+    if (response.results.length > 0)
+        return response.results[0];
+ 
+   alert('Could not find location.');
+   return null;
+}
 
-    fetch(apiUrl)
-        .then(function(response) {
 
-        })
-        .catch(function(error) {
-            console.log("Unable to connect to Open Weather Map");
-        });
+function getValue(elementId) {
+    return document.getElementById(elementId).value;
+}
 
-    console.log(longitude);
-    console.log(latitude);
-
-    var map = L.map('map',{minZoom: 3}).setView([0,0], 3);
-
-    L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=4pATqKTD2AGLk1KXutiy', {
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
-    }).addTo(map);
-    $("map").appendTo("#map");
-};
-
-weatherMap();
->>>>>>> origin/tomtom-map
