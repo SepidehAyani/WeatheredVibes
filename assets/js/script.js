@@ -30,7 +30,6 @@ var searchCity = function (city) {
         .then(function (response) {
             //request was successful
             if (response.ok) {
-                console.log(response);
                 response.json().then(function (data) {
                     displayWeather(data);
                 });
@@ -61,7 +60,7 @@ function displayNews(input) {
             currentNewsEl.innerHTML = "";
 
             var newsTitleEl = document.createElement("div");
-            newsTitleEl.innerHTML = '<strong>Title: </strong>' + newsItem.title;
+            newsTitleEl.innerHTML = '<strong><br>Title: </strong>' + newsItem.title;
 
             var newsContentEl = document.createElement("div");
             newsContentEl.innerHTML = '<strong>Description: </strong>' + newsItem.description;
@@ -89,13 +88,16 @@ function displayNews(input) {
 // this will go into a different feature
 var displayWeather = function (data) {
     var dt = new Date(data.dt * 1000);
-    console.log(dt.toDateString());
+    var weatherIcon = data.weather[0].icon;
+    var iconURL = "https://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
     var currentWeatherEl = document.querySelector("#weather");
     currentWeatherEl.innerHTML = "";
     var cityDateEl = document.createElement("ul");
-    cityDateEl.textContent = data.name + " " + dt;
+    cityDateEl.textContent = data.name + " " + dt.toUTCString();
     var tempEl = document.createElement("ul");
     tempEl.innerHTML = '<strong>Current Temp: </strong>' + data.main.temp + " \u00B0F";
+    var weatherIconEl = document.createElement("ul");
+    weatherIconEl.innerHTML = '<img src=' + iconURL + '>';
     var currentConditionsEl = document.createElement("ul");
     currentConditionsEl.textContent = data.weather[0].main;
     var windEl = document.createElement("ul");
@@ -103,6 +105,7 @@ var displayWeather = function (data) {
     var humidityEl = document.createElement("ul");
     humidityEl.innerHTML = '<strong>Humidity: </strong>' + data.main.humidity;
     currentWeatherEl.appendChild(cityDateEl);
+    currentWeatherEl.appendChild(weatherIconEl);
     currentWeatherEl.appendChild(currentConditionsEl);
     currentWeatherEl.appendChild(tempEl);
     currentWeatherEl.appendChild(windEl);
@@ -123,7 +126,6 @@ function addToList(city) {
     $(listEl).attr("class", "list-group-item");
     $(listEl).attr("data-value", city.toUpperCase());
     $(".list-group").append(listEl);
-    console.log(city);
 }
 
 //past searched cities
