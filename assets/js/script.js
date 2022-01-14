@@ -3,7 +3,6 @@ var cityInputEl = document.querySelector("#city-input");
 var citySearchEl = document.querySelector("#search-input");
 var searchHistory = [];
 var city = [];
-var apiKey = "17046fe6ac243c48ab15eff676d280e3";
 var UofM = [-93.22770, 44.974]
 
 var formSubmitHandler = function (event) {
@@ -14,6 +13,7 @@ var formSubmitHandler = function (event) {
     if (city) {
         searchCity(city);
         displayNews(city);
+        searchMap(city);
         //clear old content
         cityInputEl.value = "";
     } else {
@@ -24,7 +24,7 @@ var formSubmitHandler = function (event) {
 
 // search a city
 var searchCity = function (city) {
-    var apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
+    var apiURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + window.appConfig.weatherApiKey;
     //make a get request to url
     fetch(apiURL)
         .then(function (response) {
@@ -47,7 +47,7 @@ var searchCity = function (city) {
 
 // display news data
 function displayNews(input) {
-    var newsUrl = `https://gnews.io/api/v4/search?q=${input}&token=dc689af2927e8b88560a240eaf291ca4`;
+    var newsUrl = `https://gnews.io/api/v4/search?q=${input}&token=${window.appConfig.newsToken}`;
     var newsRequest = new Request(newsUrl);
     const newsResponsePromise = fetch(newsRequest);
 
@@ -74,7 +74,7 @@ function displayNews(input) {
             newsPublishedAtEl.innerHTML = '<strong>Published At: </strong>' + newsItem.publishedAt;
 
             var newsUrl = document.createElement("a");
-            newsUrl.innerHTML = '<strong>Read More Here </strong>' ;
+            newsUrl.innerHTML = '<strong>Read More Here </strong>';
             newsUrl.href = newsItem.url;
             newsUrl.target = "_blank";
 
@@ -165,66 +165,29 @@ function clearHistory(event) {
     document.location.reload();
 }
 
-
-$(document).on("click", invokePastSearch);
-$(window).on("load", loadlastCity);
-$("#clear-history").on("click", clearHistory);
-citySearchEl.addEventListener("submit", formSubmitHandler);
-
 //initial map loading
 var tomTomMap;
 tomTomMap = tt.map({
-    key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
+    key: window.appConfig.mapApiKey,
     container: "map",
     center: UofM,
     zoom: 7.5
 });
 
 //map search
-var handelResults = function (result) {
-    console.log(result);
-}
-var search = function () {
-    tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityInputEl })
+var searchMap = function () {
+    tt.services.fuzzySearch({ key: window.appConfig.mapApiKey, query: cityInputEl.value })
         .go()
         .then(function centerAndZoom(response) {
             tomTomMap.flyTo({ center: response.results[0].position, zoom: 7 });
+            console.log(response)
         })
         .catch(function (error) {
-            alert("Could not find location (" + cityInputEl + "). " + error.message);
-
+            alert("Could not find location (" + cityInputEl.value + "). " + error.message);
         });
 };
 
-// weather layers
-// 2 second delay added
-setTimeout(function () {
-    tomTomMap.addSource("owm_source", {
-        type: "raster",
-        tiles: ["https://tile.openweathermap.org/map/layer/{z}/{x}/{y}.png?appid=09f252a8b9d0c9071a537e314433b7e1"],
-        tileSize: 10000,
-        minZoom: 0,
-        maxZoom: 12,
-        attribution: "openWeatherMapAttribution",
-    });
-    tomTomMap.addLayer({
-        'id': 'owm_layer',
-        'type': 'raster',
-        'source': 'owm_source',
-        'layout': { 'visibility': 'visible' }
-    });
-}, 2500);
-
-currentWeatherData({
-    appid: "https://tile.openweathermap.org/map/layer/z/x/y.png?appid=09f252a8b9d0c9071a537e314433b7e1",
-    lat: x,
-    lon: y,
-    units: 'imperial'
-})
-    .go()
-    .then(function (response) {
-        console.log(response.weather[0].description);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+$(document).on("click", invokePastSearch);
+$(window).on("load", loadlastCity);
+$("#clear-history").on("click", clearHistory);
+citySearchEl.addEventListener("submit", formSubmitHandler);
