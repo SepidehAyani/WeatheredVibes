@@ -34,6 +34,7 @@ var searchCity = function (city) {
                 response.json().then(function (data) {
                     console.log(data);
                     displayWeather(data);
+                    weatherMap(data);
                 });
                 /////need to make modals instead
             } else {
@@ -172,6 +173,7 @@ $("#clear-history").on("click", clearHistory);
 citySearchEl.addEventListener("submit", formSubmitHandler);
 
 //initial map loading
+<<<<<<< HEAD
 var map = tt.map({
     key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH",
     container: "map",
@@ -260,3 +262,31 @@ tt.services.fuzzySearch({ key: "PP8FnJ4PZDRGc7Lc4pCjGJAO6GYbtcwH", query: cityIn
 
     });
 
+=======
+var weatherMap = function (data) {
+    var apiKey = '976604eaf8a4b2248a8f6d76062658a9';
+    var apiUrl = 'http://maps.openweathermap.org/maps/2.0/weather/PR0/8/' + longitude + '/' + latitude + '?appid=' + apiKey;
+    var longitude = data.coord.lon;
+    var latitude = data.coord.lat;
+
+    fetch(apiUrl)
+        .then(function(response) {
+
+        })
+        .catch(function(error) {
+            console.log("Unable to connect to Open Weather Map");
+        });
+
+    console.log(longitude);
+    console.log(latitude);
+
+    var map = L.map('map',{minZoom: 3}).setView([0,0], 3);
+
+    L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=4pATqKTD2AGLk1KXutiy', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+    }).addTo(map);
+    $("map").appendTo("#map");
+};
+
+weatherMap();
+>>>>>>> origin/tomtom-map
