@@ -1,0 +1,89 @@
+.hero {
+  background-image: url("../images/weatherbanner.png");
+  background-size: cover;
+  background-position: center;
+}
+
+#hero {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 'Staatliches', cursive;
+    font-size:100px;
+    text-align: center;
+    color: rgb(54, 54, 102);
+    background-color: rgba(253, 254, 255, 0.527);
+}
+
+.subtitle {
+  text-align: center;
+}
+
+#search {
+    background-color:rgb(175, 224, 248);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#search-input {
+  margin: 20px;
+}
+
+#weather-box {
+  text-align: center;
+  background-color: rgba(55, 61, 148, 0.884);
+  color: white;
+  font-weight: bold;
+  margin: 10px;
+}
+
+#news {
+    text-align: center;
+    background-color: rgba(110, 180, 245, 0.801);
+    margin: 10px;
+}
+#news-box {
+    color: white;
+    font-weight:bold;
+}
+
+#news-box a {
+    text-align: center;
+}
+
+#history {
+  text-align: center;
+  background-color: rgba(175, 213, 248, 0.801);
+  margin: 10px;
+}
+
+.list-group {
+    color: rgb(54, 54, 102);
+    font-weight: bold;
+    padding: 5px;
+}
+
+.list-group-item:hover {
+    background-color: white;
+}
+
+.title {
+    color: white;
+}
+
+#radar-map {
+  background-color: #d9e3eb;
+  color: rgb(54, 54, 102);
+  text-align: center;
+  overflow: visible;
+}
+
+#map {
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    overflow:visible;
+    margin-left: 65px;
+    margin-right: 65px;
+    margin-bottom: 100px;
+    height: 400px;
+    width: auto;
+}
